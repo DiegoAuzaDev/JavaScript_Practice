@@ -16,8 +16,8 @@ function stringReplacement(originalText, replacement, position){
     // this line will split the text base on " " : for example: originalText = "This is a new text";
     // return = ["This", "is", "a", "new", "text"]; 
     let textArray = originalText.split(" ");
-    // ! check if position is undefined and if it is, we set a default value
-    var positionToReplace = position;
+    // ! check if the position is undefined or null and if it is, we set a default value
+    let positionToReplace = position;
     if(position == undefined || position == null){
         positionToReplace = 0
     }   
