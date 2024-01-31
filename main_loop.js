@@ -1,11 +1,19 @@
 // Write a foorlopp that will console.log number from 101 to 41 
 // a. Then convert this loop to print only the even number from 101 - 41.
 
-let initalValue = 120;
-let finalValue = 101;
-let instructionAll = "all";
-let instructionEven = "even";
-let instructionOdd = "odd";
+// ! If you want to run this code at test you must take a look at the path you are currently targeting 
+// ? How to run this JS file 
+// ? paste this command line : node main_loop.js
+
+
+// ! Here you can change the value of the number but do not change the string values for instructionAll - instructionEven - instructionOdd
+let initalValue = 120;  // allow 
+let finalValue = 101;   // allow
+let instructionAll = "all";  // stop 
+let instructionEven = "even"; // stop
+let instructionOdd = "odd"; // stop
+
+easyForLoop(initalValue, finalValue, instructionOdd);
 
 
 function easyForLoop(initalValueLoop, finalValueLoop,instruction ){
@@ -47,19 +55,19 @@ function easyForLoop(initalValueLoop, finalValueLoop,instruction ){
         console.log("------------------   even    --------------");
     }
     //
-    //
+    // all negative even numbers
     //
     if(initalValueLoop > finalValueLoop && instruction == "even"){
-        console.log("------------------  counter all (-) --------------");
+        console.log("------------------  counter even (-) --------------");
         for(let index = initalValueLoop; index >=  finalValueLoop; index--){
             if(index % 2 == 0){
                 console.log(`|                   -${index }                      |`);
             }
         }
-        console.log("------------------ counter all (-) -----------------");
+        console.log("------------------ counter even (-) -----------------");
     }
     //
-    //
+    // all odd numbers
     //
     if(initalValueLoop < finalValueLoop && instruction == "odd"){
         console.log("------------------ odd --------------");
@@ -71,7 +79,16 @@ function easyForLoop(initalValueLoop, finalValueLoop,instruction ){
         console.log("------------------ odd  --------------");
     }
     //
+    // 
+    // 
+    if(initalValueLoop > finalValueLoop && instruction == "odd"){
+        console.log("------------------  counter odd (-) --------------");
+        for(let index = initalValueLoop; index >=  finalValueLoop; index--){
+            if(index % 2 != 0){
+                console.log(`|                   -${index }                      |`);
+            }
+        }
+        console.log("------------------ counter odd (-) -----------------");
+    }
 
 }
-
-easyForLoop(initalValue, finalValue, instructionEven);
