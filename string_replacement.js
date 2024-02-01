@@ -4,9 +4,9 @@
 // a. Eg: if “This is a test” and  “****” is sent to the function. Return will be “This 
 // "***"" is a test”.
 
-let myOriginalText = "the dog is eating food";
+let myOriginalText = "the dog is asdfasdfasdfsd food";
 let myReplacement = "#5@&*!";
-let myPosition = 1;
+let myPosition = 3;
 
 stringReplacement(myOriginalText, myReplacement, myPosition);
 

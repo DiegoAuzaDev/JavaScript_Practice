@@ -31,7 +31,7 @@ function getPricesLIst(myList){
     console.log(finalPrice)
     console.log( "+ ------------------------------ YOUR LIST ---------------------------------------+")
     console.log("")
-    console.log( "| You are about to pay the following list of items    " + itemNames + " +")
+    console.log( "| You are about to pay the following list of items    ," + itemNames + "," + " +")
     console.log( "| You are about to pay the total of  " + finalPrice + " +")
         console.log("");
     console.log( "+ ------------------------------ YOUR LIST ---------------------------------------+");

@@ -16,44 +16,90 @@ number as an argument and formats it as follows:
 */
 
 
-formatPhoneNumber("1234");
-formatPhoneNumber("123456789098");
-formatPhoneNumber("112334556443");
+formatPhoneNumber("123412");
+formatPhoneNumber("12345678");
+formatPhoneNumber("188988");
+formatPhoneNumber("1123345564ppp");
+
+
 formatPhoneNumber("123456789098adfsfs");
+
+
+
+
 // formatPhoneNumber("123456789.9");
 // formatPhoneNumber("-123456789.9");
 // formatPhoneNumber("adfasf");
 
 function formatPhoneNumber(phoneNuber){
+
+
+
   //! We do not use parseInt because we must ensure that the value passed to the function is a valid number.
   // let thisNaN = parseInt(phoneNuber)
 
   //? In this case, Number() will return the number, and if it cannot be converted, it will yield NaN (Not a Number)
 
   let number = Number(phoneNuber);
+
+
+
+
+
+
+
   let numberLength = null;
   let numberString = null;
   let numberFormat = null;
 
 
+
+
+
+
   // you can use !isNaN, typeof value === 'number'
 
   if (!isNaN(number)) {
+
+
+
     // no decimal numbers
     number = Math.floor(number);
+
+
+
     // no negative numbers
     number = Math.abs(number);
+
+
     numberLength = number.toString().length;
+
+
     numberString = `${number}`
+
+
+
+
 
     if(numberLength < 10 ){
         numberString = numberString.padStart(10, "0");
     }
     if(numberLength > 10){
         let numberLargeExtra = numberString.length - 10
+
+
         numberString = numberString.slice(numberLargeExtra);
+
+
+
     }
     numberFormat = numberString.split("")
+
+
+
+
+
+
 
     let initialNumberFomat = numberFormat.slice(0, 3);
      initialNumberFomat = initialNumberFomat.join("");
@@ -63,6 +109,8 @@ function formatPhoneNumber(phoneNuber){
         secondHalfNumberFormat = secondHalfNumberFormat.join("");
 
     numberFormat = new Set();
+
+
     numberFormat.add("(")
     numberFormat.add(initialNumberFomat)
     numberFormat.add(")")
