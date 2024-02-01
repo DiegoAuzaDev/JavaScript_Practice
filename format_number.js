@@ -18,8 +18,10 @@ number as an argument and formats it as follows:
 
 formatPhoneNumber("1234");
 formatPhoneNumber("123456789098");
-// formatPhoneNumber("123456789000");
-// formatPhoneNumber("123456fadfaf0");
+formatPhoneNumber("112334556443");
+formatPhoneNumber("123456789098adfsfs");
+// formatPhoneNumber("123456789.9");
+// formatPhoneNumber("-123456789.9");
 // formatPhoneNumber("adfasf");
 
 function formatPhoneNumber(phoneNuber){
@@ -31,23 +33,51 @@ function formatPhoneNumber(phoneNuber){
   let number = Number(phoneNuber);
   let numberLength = null;
   let numberString = null;
+  let numberFormat = null;
+
 
   // you can use !isNaN, typeof value === 'number'
 
   if (!isNaN(number)) {
-
+    // no decimal numbers
+    number = Math.floor(number);
+    // no negative numbers
+    number = Math.abs(number);
     numberLength = number.toString().length;
     numberString = `${number}`
 
     if(numberLength < 10 ){
         numberString = numberString.padStart(10, "0");
-        console.log(numberString)
     }
     if(numberLength > 10){
         let numberLargeExtra = numberString.length - 10
         numberString = numberString.slice(numberLargeExtra);
-        console.log(numberString)
     }
+    numberFormat = numberString.split("")
+
+    let initialNumberFomat = numberFormat.slice(0, 3);
+     initialNumberFomat = initialNumberFomat.join("");
+    let firstHalfNumberFormat = numberFormat.slice(3, 6)
+      firstHalfNumberFormat = firstHalfNumberFormat.join("");
+    let secondHalfNumberFormat = numberFormat.slice(6, -1)
+        secondHalfNumberFormat = secondHalfNumberFormat.join("");
+
+    numberFormat = new Set();
+    numberFormat.add("(")
+    numberFormat.add(initialNumberFomat)
+    numberFormat.add(")")
+    numberFormat.add(" ")
+    numberFormat.add(firstHalfNumberFormat)
+    numberFormat.add("-")
+    numberFormat.add(secondHalfNumberFormat);
+    let finalString = Array.from(numberFormat)
+    if(finalString.length < 7){
+    finalString.splice(4, 0, "000")
+    }
+
+      console.log(finalString.join(""))
+    return finalString;
+
 
   } else {
     console.log("This is not a number and you must double check the input ");
