@@ -64,30 +64,42 @@ const pause = (duration) => {
   });
 };
 
-
-// APP 
+// APP
 const APP = {
-  // Init will store all the ev listener 
+  // Array that will hold data
+  myGiftList: [],
+  mycapturedPokemonList: [],
+  // get Element to add, delete and fulter data
+  pokemonElementGift: document.getElementById("pokemon-container-gift"),
+  pokemonElementCaptured: document.getElementById("pokemon-container-caputred"),
+
+  // Init will store all the ev listener
   init() {
-    console.log(myPokemons);
+    APP.getMyPokemonList();
   },
-  // Array that will hold data 
-  myGiftList : [],
-  mycapturedPokemonList : [],
 
-  // Here we are going to emulate an htpp req 
-  async getMyPokemonList() {
-    await pause(5000)
+  // Here we are going to emulate an htpp req
+
+  getMyPokemonList() {
+    // Show loading indicator
+    const loadingIndecator = document.createElement("p");
+    loadingIndecator.innerHTML = "Loading Data...";
+    loadingIndecator.classList.add("indicator");
+    APP.pokemonElementCaptured.classList.add("center");
+    APP.pokemonElementCaptured.append(loadingIndecator);
+
+    // Show empty list indicator
+    const emptyIndicator = document.createElement("p");
+    emptyIndicator.innerHTML = "Empty List :C";
+    emptyIndicator.classList.add("indicator");
+    APP.pokemonElementGift.classList.add("center");
+    APP.pokemonElementGift.append(emptyIndicator);
   },
+  filterPokemonListByHealth() {},
   // Delete Pokemon when user clicks on Cancel Button
-  deleteItemGiftList(){
-
-  },
+  deleteItemGiftList() {},
   // Send Pokemon List and show confirmation message
-  sendGiftList(){
-
-  }
-
+  sendGiftList() {},
 };
 
 // Wait for doc to load

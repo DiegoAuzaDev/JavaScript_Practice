@@ -3,41 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Async Await</title>
+    <link rel="stylesheet" href="./main.css" />
+    <title>Pokemon</title>
   </head>
   <body>
-    <main>
-      <h1>Pokemons List</h1>
-      <!-- Side container -->
-      <section>
-        <h2>My Captured Pokemons</h2>
-        <p>Pokemons to Send</p>
-        <div>
-          <!-- Here add my Pokemons -->
-          <!-- Display data about each Pokemon -->
-          <!-- name -->
-          <!-- type  -->
-          <!-- health -->
-
-        </div>
-      </section>
-      <!-- Side container -->
-      <!-- Side container -->
-      <section>
-        <h2>Send Pokemons to Friend</h2>
-        <div>
-          <p>Pokemons to Send</p>
-          <div id="pokemon_container_gift"><P></P>
-            <!-- Here add Pokemons to send -->
-            <!-- add the name of the friend -->
+    <main class="main">
+      <div class="title-container">
+        <img src="./pokeball.png" alt="" />
+        <h1>Pokemons List</h1>
+        <img src="./pokeball.png" alt="" />
+      </div>
+      <div class="side-container">
+        <!-- Side container -->
+        <section class="side-list">
+          <h2>My Captured Pokemons</h2>
+          <p>My Captured Pokemons</p>
+          <div class="pokemon-container" id="pokemon-container-caputred">
+            <!-- Here add my Pokemons -->
+            <!-- Display data about each Pokemon -->
+            <!-- name -->
+            <!-- type  -->
+            <!-- health -->
           </div>
-          <input type="text" name="name" id="friend_name"  maxlength="10" placeholder="Name">
-          <input type="email" name="email" id="friend_email" placeholder="Email">
-          <button>Send To Friend</button>
-          <button>Cancel</button>
-        </div>
-      </section>
-      <!-- Side container -->
+        </section>
+        <!-- Side container -->
+        <!-- Side container -->
+        <section class="side-list">
+          <h2>Send Pokemons to Friend</h2>
+          <div>
+            <p>Pokemons to Send</p>
+            <div class="pokemon-container" id="pokemon-container-gift">
+              <!-- Here add Pokemons to send -->
+              <!-- add the name of the friend -->
+            </div>
+            <div class="input-container">
+               <input
+                type="text"
+                name="name"
+                id="friend_name"
+                maxlength="10"
+                placeholder="Name"
+              />
+              <input
+                type="email"
+                name="email"
+                id="friend_email"
+                placeholder="Email"
+              />
+            </div>
+            <div class="button-container">
+
+              <button>Send To Friend</button>
+              <button>Cancel</button>
+            </div>
+          </div>
+        </section>
+        <!-- Side container -->
+      </div>
     </main>
   </body>
   <script src="./main.js" defer></script>
