@@ -1,4 +1,3 @@
-
 const marriageProposals = [
   "Will you make me the happiest person alive and marry me?",
   "I can't imagine spending my life with anyone else. Will you marry me?",
@@ -27,12 +26,20 @@ const catImage = [
   "cat5.webp",
   "cat6.jpeg",
 ];
+
 // get HTMl elements and store them in variables
+
 const yesButton = document.getElementById("yes_button");
 const noButton = document.getElementById("no_button");
 const text = document.getElementById("text");
 const img = document.getElementById("cat_image");
 const heart = document.getElementsByClassName("heart");
+
+console.log(yesButton);
+console.log(noButton);
+console.log(text);
+console.log(img);
+console.log(heart);
 
 let count = 2;
 let noCount = 2;
@@ -42,58 +49,54 @@ let imageCount = 0;
 text.textContent = marriageProposals[textCount];
 img.src = `./src/${catImage[imageCount]}`;
 
-yesButton.addEventListener("click", ()=> {
+yesButton.addEventListener("click", () => {
   changeHeartYes();
-})
+});
 
-noButton.addEventListener("click", ()=>{
-  count = count + 0.09
-   noCount = noCount - 0.09;
+noButton.addEventListener("click", () => {
+  count = count + 0.09;
+  noCount = noCount - 0.09;
   getYesButtonBigger();
   getNoButtonSmaller();
   changeTextContent();
   changeImageContent();
   changeHeart();
-})
-function getNoButtonSmaller (){
+});
+
+function getNoButtonSmaller() {
   noButton.style.padding = `${noCount}rem`;
   noButton.style.opacity = `${noCount}`;
-
 }
-function getYesButtonBigger(){
-  yesButton.style.padding = `${count}rem`
+function getYesButtonBigger() {
+  yesButton.style.padding = `${count}rem`;
 }
-function changeTextContent(){
+function changeTextContent() {
   textCount++;
-  if(textCount == marriageProposals.length){
+  if (textCount == marriageProposals.length) {
     textCount = 0;
     text.textContent = marriageProposals[textCount];
-  } else {
-   text.textContent = marriageProposals[textCount];
-  }
-}
-function changeImageContent(){
-  imageCount ++ 
-  pxCount = pxCount + 15
-  img.style.height = `${pxCount}px`;
-  if(imageCount == catImage.length){
-    imageCount = 0
-     img.src = `./src/${catImage[imageCount]}`;
+    return;
+  } 
+    text.textContent = marriageProposals[textCount];
 
+}
+function changeImageContent() {
+  imageCount++;
+  pxCount = pxCount + 15;
+  img.style.height = `${pxCount}px`;
+  if (imageCount == catImage.length) {
+    imageCount = 0;
+    img.src = `./src/${catImage[imageCount]}`;
   } else {
-  img.src = `./src/${catImage[imageCount]}`;
+    img.src = `./src/${catImage[imageCount]}`;
   }
 }
-function changeHeart(){
+function changeHeart() {
   heart[0].src = "./src/heartBreak.webp";
   heart[1].src = "./src/heartBreak.webp";
 }
-function changeHeartYes(){
-    heart[0].src = "./src/heart.webp";
-    heart[1].src = "./src/heart.webp";
-     img.src = `./src/catYes.png`;
+function changeHeartYes() {
+  heart[0].src = "./src/heart.webp";
+  heart[1].src = "./src/heart.webp";
+  img.src = `./src/catYes.png`;
 }
-
-
-
-
