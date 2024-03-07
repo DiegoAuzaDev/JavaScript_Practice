@@ -4,7 +4,7 @@ const myPokemons = [
     captureAt: "2023-12-20T08:42:17.326Z",
     name: "Pokemon 1",
     type: "Fire",
-    health: "Good",
+    health: "Bad",
     img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png",
   },
   {
@@ -67,12 +67,24 @@ const pause = (duration) => {
 
 // APP 
 const APP = {
+  // Init will store all the ev listener 
   init() {
     console.log(myPokemons);
   },
+  // Array that will hold data 
   myGiftList : [],
   mycapturedPokemonList : [],
-  deleteItemGistList(){
+
+  // Here we are going to emulate an htpp req 
+  async getMyPokemonList() {
+    await pause(5000)
+  },
+  // Delete Pokemon when user clicks on Cancel Button
+  deleteItemGiftList(){
+
+  },
+  // Send Pokemon List and show confirmation message
+  sendGiftList(){
 
   }
 
