@@ -1,3 +1,4 @@
+// Dummy Pokemon List
 const myPokemons = [
   {
     captureAt: "2023-12-20T08:42:17.326Z",
@@ -56,10 +57,26 @@ const myPokemons = [
     img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/027.png",
   },
 ];
+// This funtion will manage time delay
+const pause = (duration) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, duration);
+  });
+};
 
+
+// APP 
 const APP = {
   init() {
     console.log(myPokemons);
   },
+  myGiftList : [],
+  mycapturedPokemonList : [],
+  deleteItemGistList(){
+
+  }
+
 };
+
+// Wait for doc to load
 document.addEventListener("DOMContentLoaded", APP.init);
