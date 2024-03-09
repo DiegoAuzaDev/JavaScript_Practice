@@ -65,6 +65,8 @@ let myPokemons = [
     img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/027.png",
   },
 ];
+
+
 // This funtion will manage time delay
 const pause = (duration) => {
   return new Promise((resolve) => {
@@ -87,21 +89,50 @@ const APP = {
     document
       .getElementById("cancel")
       .addEventListener("click", APP.deleteItemGiftList);
+
+
   },
+
+
+
+
+
+
+
+
+
+
+
+
   // Here we are going to emulate an htpp req
   async getMyPokemonList() {
     APP.changePokemonContainerContent();
     await pause(2000);
     APP.updatePokemonCapturePokemon();
-
     //
   },
+
+
+
+
+
+
+
+
+
+
   updatePokemonCapturePokemon() {
+
+
     const elementsToRemove = document.getElementsByClassName("loading");
+
+    
     // Convert HTMLCollection to an array to use forEach
     Array.from(elementsToRemove).forEach((element) => {
       element.remove();
     });
+
+
 
     // Clear the existing content of the <ul> element
     document.getElementById("pokemon-list").innerHTML = "";
@@ -121,6 +152,10 @@ const APP = {
       });
     });
   },
+
+
+
+
   updateGiftPokemon() {
 
     // Clear the existing content of the container element
@@ -158,6 +193,8 @@ const APP = {
   },
   // Helper Functions
   changePokemonContainerContent() {
+
+    
     // Show loading indicator
     const loadingIndecator = document.createElement("p");
     const emptyIndicator = document.createElement("p");
@@ -171,6 +208,7 @@ const APP = {
   },
   createPokemonLiElement(pokemon, isGift) {
     const pokemonElement = document.createElement("li");
+
     pokemonElement.classList.add("pokemon-element");
 
     if (isGift) {
@@ -186,6 +224,8 @@ const APP = {
             />
     `;
     }
+
+
     pokemonElement.innerHTML = `
      <div>
         <p>${pokemon.name}</p>
@@ -198,6 +238,8 @@ const APP = {
             alt=""
             />
     `;
+
+
     return pokemonElement;
   },
 };
