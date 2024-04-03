@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>SPA Final Project</title>
+</head>
+<body>
+    <header>
+        <h1>Picture This</h1>
+        <nav>
+            <button class="active" id="btnSearch">Search</button>
+        <button id="btnSaved">Saved</button>
+        </nav>
+    </header>
+    <main>
+        
+        <div  class="container">
+            <div class="searchForm">
+                <p>Run a search for images</p>
+            <form method="dialog">
+              <p>
+                <label for="keyword">Key Term</label>
+                <input type="text" id="keyword" name="keyword" />
+              </p>
+              <p>
+                <button id="btnRunSearch">Run Search</button>
+              </p>
+            </form>
+            </div>
+            <div id="results">
+                
+            </div>
+        </div>
+    </main>
+
+    <script src="./js/main.js" type="module"></script>
+</body>
+</html>
