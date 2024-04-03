@@ -86,3 +86,7 @@ main {
 #results {
     margin-top: 20px;
 }
+.saved-image {
+    height: 100px;
+    width: 100px;
+}

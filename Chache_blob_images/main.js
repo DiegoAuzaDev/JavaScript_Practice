@@ -1,15 +1,23 @@
 const APIKEY = `43214616-0b36a50962c68ac8ab7f41267`;
 const BASEURL = `https://pixabay.com/api/`;
+const MYCACHEKEY = "yourKeysGoesHere";
 
 const urlStateEnum = {
   saved: "saved",
   search: "search",
 };
 
-let savedImagesBlob = null;
+let resultSearchContainer = null;
+let keywordLabel = null;
+let savedImagesList = [];
+
+let cacheRef = null;
 
 function init() {
+  resultSearchContainer = document.getElementById("results");
+  keywordLabel = document.getElementById("keyword");
   addListeners();
+  openCache();
   //anything else you need right away will go here
 }
 
@@ -18,8 +26,17 @@ function addListeners() {
   window.addEventListener("popstate", popState);
   document.getElementById("btnRunSearch").addEventListener("click", runSearch);
   //handle user picking an image
+  document
+    .getElementById("btnSaved")
+    .addEventListener("click", showSavedImages);
   document.getElementById("results").addEventListener("click", showPickedImage);
 }
+
+async function openCache() {
+  cacheRef = await caches.open(MYCACHEKEY);
+}
+
+async function addItemsCache() {}
 
 function popState() {
   let popstateSelector = "";
@@ -28,8 +45,10 @@ function popState() {
   if (location.hash) {
     let urlSplit = location.hash.split("/");
     [popstateSelector, popstateInputValue] = urlSplit;
-    let keyword = document.getElementById("keyword");
-    keyword.value = popstateInputValue;
+    keywordLabel.value = popstateInputValue;
+    runSearch();
+  } else {
+    cleanSeachResult();
   }
 }
 
@@ -38,13 +57,11 @@ function updateHistory(urlState, keyValue) {
     case urlStateEnum.search:
       history.pushState({}, "", `#search/${keyValue}`);
       break;
-    case urlStateEnum.search:
+    case urlStateEnum.saved:
       history.pushState({}, "", `#saved`);
       break;
   }
 }
-
-function handleState() {}
 
 function runSearch() {
   // ev.preventDefault();
@@ -72,15 +89,19 @@ function runSearch() {
     });
 }
 
+function cleanSeachResult() {
+  keywordLabel.value = "";
+  resultSearchContainer.innerHTML = ``;
+}
+
 function displaySearchResults(data) {
-  let results = document.querySelector("#results");
-  results.className = "search-results";
+  resultSearchContainer.className = "search-results";
 
   // Create a document fragment to store the generated HTML
   let fragment = document.createDocumentFragment();
 
   if (data.hits.length === 0) {
-    results.innerHTML = "<h2>No Search Results.</h2>";
+    resultSearchContainer.innerHTML = "<h2>No Search Results.</h2>";
     return;
   }
 
@@ -104,12 +125,60 @@ function displaySearchResults(data) {
   );
 
   // Clear the existing content and append the document fragment
-  results.innerHTML = "";
-  results.appendChild(fragment);
+  resultSearchContainer.innerHTML = "";
+  resultSearchContainer.appendChild(fragment);
 }
 
-function showPickedImage() {
-  //once user click on an image handle here
+async function showPickedImage(ev) {
+  // Check if the clicked element is an image or its parent container
+  const clickedElement = ev.target;
+  const clickedDiv = clickedElement.closest(".card");
+
+  // If the clicked element is a div containing an image
+  if (clickedDiv) {
+    const fullImageURL = clickedDiv.getAttribute("data-full");
+    await imgDataUrlToBlob(fullImageURL);
+    // Perform whatever action you want with the full image URL
+  }
+}
+
+async function showSavedImages() {
+  updateHistory(urlStateEnum.saved);
+  resultSearchContainer.innerHTML = ``;
+  let fragment = document.createDocumentFragment();
+  try {
+    const keys = await cacheRef.keys();
+    // Extract URLs from keys
+    keys.forEach(async (request) => {
+      let div = document.createElement("div");
+      div.classList.add("card");
+      let img = document.createElement("img");
+      img.src = request.url;
+      img.alt = `photo`;
+      img.classList.add("saved-image");
+
+      div.appendChild(img);
+      console.log(div);
+      fragment.appendChild(div);
+    });
+    resultSearchContainer.appendChild(fragment);
+  } catch (err) {
+    console.error("Error retrieving cache keys:", err);
+  }
+}
+
+
+async function imgDataUrlToBlob(fullData) {
+  try {
+    const response = await fetch(fullData);
+    if (!response.ok) {
+      throw new Error("Invalid Response");
+    }
+    const blobResponse = await response.blob();
+    await cacheRef.put(fullData, new Response(blobResponse));
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 window.addEventListener("DOMContentLoaded", init);
