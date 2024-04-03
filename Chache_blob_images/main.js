@@ -1,5 +1,12 @@
-const APIKEY = `YOUR_API_KEY`;
+const APIKEY = `43214616-0b36a50962c68ac8ab7f41267`;
 const BASEURL = `https://pixabay.com/api/`;
+
+const urlStateEnum = {
+  saved: "saved",
+  search: "search",
+};
+
+let savedImagesBlob = null;
 
 function init() {
   addListeners();
@@ -8,13 +15,39 @@ function init() {
 
 function addListeners() {
   //fetch and display searched imgs
+  window.addEventListener("popstate", popState);
   document.getElementById("btnRunSearch").addEventListener("click", runSearch);
   //handle user picking an image
   document.getElementById("results").addEventListener("click", showPickedImage);
 }
 
-function runSearch(ev) {
-  ev.preventDefault();
+function popState() {
+  let popstateSelector = "";
+  let popstateInputValue = "";
+
+  if (location.hash) {
+    let urlSplit = location.hash.split("/");
+    [popstateSelector, popstateInputValue] = urlSplit;
+    let keyword = document.getElementById("keyword");
+    keyword.value = popstateInputValue;
+  }
+}
+
+function updateHistory(urlState, keyValue) {
+  switch (urlState) {
+    case urlStateEnum.search:
+      history.pushState({}, "", `#search/${keyValue}`);
+      break;
+    case urlStateEnum.search:
+      history.pushState({}, "", `#saved`);
+      break;
+  }
+}
+
+function handleState() {}
+
+function runSearch() {
+  // ev.preventDefault();
   let keyword = document.getElementById("keyword").value;
   let url = new URL(BASEURL);
   url.searchParams.append(`key`, APIKEY);
@@ -24,7 +57,6 @@ function runSearch(ev) {
   url.searchParams.append(`order`, `popular`);
   url.searchParams.append(`per_page`, `30`);
   url.searchParams.append(`q`, keyword); //search query
-  console.log(url.searchParams.toString());
   fetch(url)
     .then((response) => {
       if (!response.ok) throw new Error("Fetch error", response.statusText);
@@ -33,6 +65,7 @@ function runSearch(ev) {
     .then((data) => {
       console.log(data);
       displaySearchResults(data);
+      updateHistory(urlStateEnum.search, keyword);
     })
     .catch((err) => {
       console.log(err.message);
@@ -75,8 +108,8 @@ function displaySearchResults(data) {
   results.appendChild(fragment);
 }
 
-function showPickedImage(){
-//once user click on an image handle here
+function showPickedImage() {
+  //once user click on an image handle here
 }
 
 window.addEventListener("DOMContentLoaded", init);
